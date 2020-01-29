@@ -34,8 +34,7 @@
 
   {{ partial "header/header.html" . }}
 
-  <rapi-doc spec-url="/resources/yaml/datadog_api_spec.yaml"> </rapi-doc>
-
+  <rapi-doc spec-url="{{ .Site.BaseURL }}resources/yaml/datadog_api_spec.yaml"> </rapi-doc>
   {{ partial "footer/footer.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
