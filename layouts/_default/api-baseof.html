@@ -32,10 +32,7 @@
 <body
   class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }}">
 
-  {{ partial "header/header.html" . }}
-
   <rapi-doc spec-url="{{ .Site.BaseURL }}resources/yaml/datadog_api_spec.yaml" show-header="" bg-color="#14191f" text-color="#aec2e0" nav-bg-color="" nav-text-color="" nav-hover-bg-color="" nav-hover-text-color="" nav-accent-color="" primary-color="" theme="dark" render-style="read" schema-style="table"> </rapi-doc>
-  {{ partial "footer/footer.html" . }}
 
   <script src="{{ (index $.Site.Data.manifest "vendor.js") | relURL}}"></script>
   <script src="{{ (index $.Site.Data.manifest "main-dd-js.js") | relURL}}"></script>
