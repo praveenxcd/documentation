@@ -72,6 +72,10 @@ Next, grant Datadog permissions to write log archives to your S3 bucket with rol
 
     {{< img src="logs/archives/log_archives_s3_datadog_settings_role_delegation.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
 
+### Storage Class
+
+You can [set a lifecycle configuration on your S3 bucket][7] to automatically transition your log archives to optimal storage classes. [Rehydration][5] supports all storage classes except for Glacier and Glacier Deep Archive. If you wish to rehydrate from archives in the Glacier or Glacier Deep Archive storage classes, you must first move them to a different storage class.
+
 ### Server side encryption (SSE)
 
 To add server side encryption to your S3 log archives, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
@@ -84,6 +88,27 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 [4]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [5]: /logs/archives/rehydrating
 [6]: https://app.datadoghq.com/logs/pipelines/archives
+[7]: https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-set-lifecycle-configuration-intro.html
+{{% /tab %}}
+
+{{% tab "Azure Storage" %}}
+
+1. Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** access tier.
+2. Set up the [Azure integration][3] within the subscription that holds your new storage account, if you haven't already. This involves [creating an App Registration that Datadog can use][4] to integrate with.
+3. Next, grant your Datadog App sufficient permission to write to and rehydrate from your storage account. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**. Input the Role called **Storage Blob Data Contributor**, select the Datadog App that you created for integrating with Azure, and save.
+  {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
+4. Go to your [Archives page][5] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
+5. Select the **Azure Storage** archive type, and the Azure Tenant and Client for the Datadog App that has the Storage Blob Data Contributor role on your storage account. Input your storage account name and a container name for your archive. 
+6. **Optional**: input a prefix directory for all the content of your log archives.
+7. Save your archive. 
+
+  {{< img src="logs/archives/logs_azure_archive_configs.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
+
+[1]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Storage%2FStorageAccounts
+[2]: https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal
+[3]: https://app.datadoghq.com/account/settings#integrations/azure
+[4]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[5]: https://app.datadoghq.com/logs/pipelines/archives
 {{% /tab %}}
 
 {{% tab "Google Cloud Storage" %}}
@@ -95,7 +120,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 4. Go to your [Archives page][7] in Datadog, and select the **Add a new archive** option at the bottom. Only Datadog users with admin status can complete this and the following step.
 5. Select the GCS archive type, and the GCS Service Account that has permissions to write on your storage bucket. Input your bucket name. Optional: input a prefix directory for all the content of your log archives. Then save your archive.
 
-  {{< img src="logs/archives/archive_select_gcs.png" alt="Add the Storage Object Creator role to your Datadogh GCP Service Account."  style="width:75%;">}}
+  {{< img src="logs/archives/archive_select_gcs.png" alt="Set your GCP bucket info in Datadog"  style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/storage
 [2]: https://cloud.google.com/storage/docs/quickstart-console
@@ -109,7 +134,7 @@ To add server side encryption to your S3 log archives, go to the **Properties** 
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all the logs that Datadog ingests. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted, so **you should check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Logs are uploaded to the archive every 15 minutes, so **you should check back on your storage bucket in 15 minutes** maximum to make sure the archives are successfully being uploaded from your Datadog account. 
 
 ## Format of the Archives
 

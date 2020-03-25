@@ -28,7 +28,7 @@ Only [Admin and Standard users][3] can access Synthetics `Settings` page.
 
 ## Global Variables
 
-Variables are global and can be used by multiple [API tests][3] and [browser tests][4]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
+Variables are global and can be used by multiple [API tests][4] and [browser tests][5]. To create a new global variable, go to the **Global Variables** tab of your **Settings** page, and click **New Global Variable** in the upper right corner of your page.
 Choose the type of variable you want to create:
 
 {{< tabs >}}
@@ -46,10 +46,6 @@ Choose the type of variable you want to create:
 
 {{% tab "Create From HTTP Test" %}}
 
-<div class="alert alert-warning">
-This feature is in private beta, <a href="/help">contact Datadog support</a> to turn on this feature for your account.
-</div>
-
 You can create variables from your existing HTTP tests by parsing its response headers or body. Variables are updated with the same frequency as the test it's coming from:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
@@ -59,9 +55,9 @@ You can create variables from your existing HTTP tests by parsing its response h
 5. Optional: enter a **Description** for your variable.
 6. Decide whether to extract your variable from the response headers, or from the response body.
     * Extract the value from **response header**: use the full response header for your variable, or parse it with a [regex][1].
-    * Extract the value from **response body**: parse the response body of the request with a JSON path, with a [regex][1], or use the full response body.
+    * Extract the value from **response body**: parse the response body of the request with a [regex][1], or use the full response body.
 
-{{< img src="synthetics/settings/variable_fromhttp.png" alt="Credential"  style="width:80%;">}}
+{{< img src="synthetics/settings/variable_from_http.png" alt="Variable from http"  style="width:80%;">}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 {{% /tab %}}
@@ -89,4 +85,5 @@ If the endpoint is being traced and whitelisted, your browser test results are t
 [1]: https://app.datadoghq.com/synthetics/settings
 [2]: /synthetics/private_locations
 [3]: /account_management/users/default_roles/
-[4]: /synthetics/api_tests#use-global-variables
+[4]: /synthetics/api_tests/#use-global-variables
+[5]: /synthetics/browser_tests/#use-global-variables

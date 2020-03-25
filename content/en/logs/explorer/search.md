@@ -50,7 +50,7 @@ Use the search bar's autocomplete feature to complete your query using existing 
 
 ### Escaping of special characters
 
-The following characters are considered special: `?`, `>`, `<`, `:`, `=`,`"`, `~`, `/`, and `\` require escaping with the `\` character.
+The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character.
 
 ### Attributes search
 
@@ -135,7 +135,7 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/explorer/?tab=facets#setup
+[1]: /logs/explorer/facets
 [2]: /infrastructure
 [3]: /integrations/#cat-log-collection
 [4]: /tagging/#tags-best-practices
