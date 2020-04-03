@@ -16,7 +16,7 @@ It's recommended that you set up Datadog as an Okta application manually, as opp
 
 ## General Details
 
-* **Single Sign On URL**: https://app.datadoghq.com/account/saml/assertion
+* **Single Sign On URL**: https://app.datadoghq.com/account/login/id/unique_id or https://my-subdomain.datadoghq.com/account/login if using a custom subdomain.
     (NOTE: If using IdP initiated login, use a public ID-specific URL which is generated after enabling IdP initiated login in Datadog. Find this URL at the '[Configure SAML][1]' page, in the 'Assertion Consumer Service URL' field. Example URL: `https://app.datadoghq.com/account/saml/assertion/id/` This also applies to the **Recipient URL** and the **Destination URL** fields respectively.)
 
 * **Recipient URL**: https://app.datadoghq.com/account/saml/assertion (or check the box labeled "Use this for Recipient URL and Destination URL" in Okta)
